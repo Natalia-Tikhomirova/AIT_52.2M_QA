@@ -11,10 +11,11 @@ import java.time.Duration;
 public class LoginTest {
 
     @Test
-    public void testLogin() {
+    public void testLogin() throws InterruptedException {
         // Инициализация WebDriver
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
+        Thread.sleep(2000);
         driver.get("https://grow-bank.io");
 
         // Создаем явное ожидание для поиска элемента username
