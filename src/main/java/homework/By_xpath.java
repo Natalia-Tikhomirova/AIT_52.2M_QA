@@ -25,7 +25,6 @@ public class By_xpath {
     @Test
     public void xpathTest() {
 
-
         WebElement secondImageLink = driver.findElement(By.xpath("(//a[@class='nivo-imageLink'])[2]"));
         System.out.println("Second image link: " + secondImageLink.getAttribute("href"));
 

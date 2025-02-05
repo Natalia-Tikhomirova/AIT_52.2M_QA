@@ -5,6 +5,7 @@ import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.json.JsonOutput;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,6 +27,7 @@ public class FindElementsTests {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
+    //!*************************************************** 12 урок *************************************************
     @Test
     public void testFindElementsTagName2() {
         //* -------------------- Локатор с тегом <h1> -------------------- *//
@@ -112,6 +114,8 @@ public class FindElementsTests {
         //* Ищем уникальный локатор
         driver.findElement(By.cssSelector(".logo")); //! 5 элементов, не подходит
         driver.findElement(By.cssSelector("div.header .logo")); //* 1 уникальный элемент, 🔥 Лучший выбор
+        driver.findElement(By.xpath("//div[@class='header']//a[@class='logo']")); // Далее варианты его же, но с помощью xPath
+        driver.findElement(By.xpath("//div[contains(@class, 'header')]//a[contains(@class, 'logo')]"));
 
         //! 🔥 Второй вариант проигрывает первому, потому что требуется сохранять все найденные элементы в коллекцию и потом обращаться к ним по индексу
         List<WebElement> logo = driver.findElements(By.className("logo"));//* 5 элементов, выбираем нужный
@@ -130,6 +134,8 @@ public class FindElementsTests {
         System.out.println(city.getAttribute("class"));
         System.out.println(city.getAttribute("autocomplete"));
     }
+
+    //!*************************************************** 13 урок *************************************************
 
     @Test
     public void xPathToCSConversion() {
@@ -174,7 +180,7 @@ public class FindElementsTests {
         //! h1 -> //h1
         driver.findElement(By.xpath("//h1"));
 
-        //!   id -> //*[@id='value']
+        //! id -> //*[@id='value']
         //* #city --> //*[@id='city']
         driver.findElement(By.xpath("//*[@id='city']"));
 
@@ -203,6 +209,127 @@ public class FindElementsTests {
         driver.findElement(By.partialLinkText("-720-"));
         driver.findElement(By.xpath("//a[@class='telephone' and text()='866-720-5721']"));
         driver.findElement(By.xpath("//a[contains(@class, 'tele') and contains(text(),'-720-')]"));
+    }
+
+    //!*************************************************** 14 урок *************************************************
+
+    @Test
+    public void siblingsCSSTest() {
+        //* ✅ <h1> внутри <app-search>, на любом уровне вложенности.
+        driver.findElement(By.cssSelector("app-search h1")); // 1 элемент
+
+        //! ❌ <h1>, которые находятся непосредственно внутри <app-search> (без промежуточных тегов).
+        //driver.findElement(By.cssSelector("app-search>h1")); // ❌ элементов, поэтому спускаемся на ступеньку ниже
+        driver.findElement(By.cssSelector("div>h1")); // ✅ при прямом пути от <div> мы достучались до <h1>
+
+        //* ✅ <div>, которые находятся внутри <app-search>, на любом уровне вложенности.
+        driver.findElement(By.cssSelector("app-search div")); // 23 элементов
+
+        //* ✅ <div>, которые являются непосредственными (прямыми) детьми <app-search>.
+        driver.findElement(By.cssSelector("app-search>div")); // 1 <div> элемент
+        driver.findElement(By.cssSelector("app-search>div>div>h1")); // 1 <h1> элемент
+
+        //* ✅ <h1>, которые находятся внутри <div>, вложенного в другой <div>.
+        driver.findElement(By.cssSelector("div div h1")); // 1 <h1> элемент
+        //driver.findElement(By.cssSelector("div div div h1")); // ❌ нет такого пути до <h1> элемента
+        driver.findElement(By.cssSelector("app-search div div h1")); // 1 <h1> элемент
+    }
+
+    @Test
+    public void nthCSSTest() {
+        //= div>span ==> //div/span
+        //= div span ==> //div//span
+
+        //! ❌ находит 2 элемента, потому что есть 2 <span> 'Affordable prices'/'Guaranteed cars' и 'City'/'Dates'
+        driver.findElement(By.cssSelector("form>div")); // 2 элемента
+        driver.findElement(By.cssSelector("app-search>app-special-offers>div>div>div>span")); // 2 элемента
+
+        //* ✅ nth-of-type(n) Выбирает n-й элемент среди элементов ОДНОГО ТИПА (например, <span>).
+        driver.findElement(By.cssSelector("form>div:nth-of-type(1)")); // 1 элемент
+        driver.findElement(By.cssSelector("app-search>app-special-offers>div>div>div>span:nth-of-type(1)")); // 1 элемент
+
+        //* ✅ nth-child(n) Выбирает n-го ребёнка среди всех типов элементов в родителе, неважно, <span> он или нет
+        driver.findElement(By.cssSelector("app-search>app-special-offers>div>div>div>span:nth-child(1)")); // 1 элемент
+    }
+
+    @Test
+    public void siblingsTest() {
+        //! parent - родитель
+        //* ✅ Находит родительский элемент (parent) для каждого <h1>.
+        driver.findElement(By.xpath("//h1/parent::*")); // Прямой родитель
+        driver.findElement(By.xpath("//h1/parent::div")); // Прямой родитель представитель <div>
+        driver.findElement(By.xpath("//h1/..")); // На шаг вверх
+
+        //! ancestor - предок
+        //* ✅ Находит всех предков (ancestor) элемента <h1>, поднимаясь вверх по DOM-дереву до <html>.
+        driver.findElement(By.xpath("//h1/ancestor::*")); // Все предки
+        driver.findElement(By.xpath("//h1/ancestor::div")); // 2 <div> элемента предка h1
+        driver.findElement(By.xpath("//h1/ancestor::div[1]")); // 1 элемент <div> элемент предок h1
+
+        //! preceding - предшествующие, предыдущие
+        //* ✅ Находит все элементы, которые расположены перед элементом <a> с текстом " Log in "
+        driver.findElement(By.xpath("//a[.=' Log in ']/preceding::*"));
+        //* ✅ Находит [1] элемент, который расположен перед элементом <a> с текстом " Log in "
+        driver.findElement(By.xpath("//a[.=' Log in ']/preceding::*[1]"));
+        //* ✅ Находит элемент <img>, который находится перед элементом <a>, содержащим текст " Let the car work "
+        driver.findElement(By.xpath("//a[text()=' Let the car work ']/preceding::img"));
+
+        //! following - следующий
+        //* ✅ Находит все элементы, которые находятся после элемента <a> с текстом "Let the car work" в структуре документа, исключая его потомков и включая все элементы на уровне или глубже в иерархии
+        driver.findElement(By.xpath("//a[text()=' Let the car work ']/following::*"));
+
+        //! sibling - брат или сестра, элемент с тем же родителем
+        //* ✅ Находит первого брата, который находится перед (preceding) или после (following) элемента <a> на том же уровне вложенности (то есть, являющийся его сиблингом — элементом с тем же родителем)
+        driver.findElement(By.xpath("//a[text()=' Sign up ']/preceding-sibling::*[1]"));
+        driver.findElement(By.xpath("//a[text()=' Terms of use ']/following-sibling::*[2]"));
+
+        driver.findElement(By.xpath("//input[@id='dates']/preceding::*")); // 54 elements matching.
+        //* ancestor::* выбирает всех предков (родителей) текущего элемента, поднимаясь по дереву DOM до самого <html>
+        driver.findElement(By.xpath("//input[@id='dates']/ancestor::*")); // 9 elements matching.
+        //* Найдёт все <h1>, которые находятся перед любым предком текущего элемента
+        driver.findElement(By.xpath("//input[@id='dates']/ancestor::*/preceding::h1")); // 1 element matching.
+        //* Найдёт все <h1>, которые находятся перед любым предком текущего элемента
+        driver.findElement(By.xpath("//input[@id='dates']/ancestor::*/preceding::div")); // 4 elements matching.
+        driver.findElement(By.xpath("//input[@id='dates']/preceding::label")); // 2 elements matching.
+        driver.findElement(By.xpath("//input[@id='dates']/preceding::label[2]")); // 1 element matching.
+    }
+
+    @Test
+    public void siblingsTest2() {
+        driver.get("https://ticket-service-69443.firebaseapp.com/"); // Открываем страницу "https://ticket-service-69443.firebaseapp.com/"
+        // Находит элемент с текстом 'Berlin City Hall | Events and Tickets' и классом 'mt-3'
+        driver.findElement(By.xpath("//*[@class='mt-3' and text()='Berlin City Hall | Events and Tickets']"));
+        // Находит элемент, содержащий класс 'mt-3' и текст 'Berlin City Hall | Events and Tickets'
+        driver.findElement(By.xpath("//span[contains(@class, 'mt-3') and contains(text(), 'Berlin City Hall | Events and Tickets')]"));
+    }
+
+    @Test
+    public void siblingTests2() {
+        driver.get("https://ticket-service-69443.firebaseapp.com/");
+        driver.findElement(By.xpath("//*[@class='mt-3' and text()='Berlin City Hall | Events and Tickets']"));
+        driver.findElement(By.xpath("//span[@class='mt-3' and text()='Berlin City Hall | Events and Tickets']"));
+        driver.findElement(By.xpath("//span[contains(@class,'mt-') and contains(text(),'Berlin City Hall | Events and Tickets')]"));
+    }
+
+    //************ https://demowebshop.tricentis.com/ *************************
+    //! .header // Header сайта
+    //! .header>div // такой локатор найдет все <div> (дети) внутри <header>
+    //! .header>div>a // найдет <a> внутри <div> внутри <header>
+    //! .header>div>a>img // найдет <img> внутри <a> внутри <div> внутри <header>
+    //! a[href="/search"] // найдет <a> с атрибутом href="/search" внизу страницы
+    //! ul (16 элементов)
+    //! ul .ico-register (1 элемент. Register)
+
+    @Test
+    public void findElementsByCssSelector() {
+        //! a.logo>img                   [Но таких элементов 3 на странице]
+        //! a.logo img                   [Но таких элементов 3 на странице]
+        //! a.logo:first-child           [Первый]
+        //! a.logo:last-child            [Последний]
+        //! //a[@class='logo']/img       [3 elements]
+        //* (//a[@class='logo']/img)[1] [поэтому используем такой поиск]
+        driver.findElement(By.cssSelector("a.logo > img:first-child")); // Первого ребенка
+        driver.findElement(By.cssSelector("div.header:nth-child(1) img:last-child")); // Последнего ребенка
     }
 
     @AfterMethod(enabled = true) // включение или отключения закрытия браузера после тестов

@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.github.bonigarcia.wdm.WebDriverManager;
+//import io.github.bonigarcia.wdm.WebDriverManager;
 import org.testng.annotations.Test;
 import java.time.Duration;
 
@@ -13,7 +13,7 @@ public class LoginTest {
     @Test
     public void testLogin() throws InterruptedException {
         // Инициализация WebDriver
-        WebDriverManager.chromedriver().setup();
+        //WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         Thread.sleep(2000);
         driver.get("https://grow-bank.io");
