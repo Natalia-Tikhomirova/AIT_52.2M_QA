@@ -1,4 +1,4 @@
-package homework.homework_15;
+package homework.homework_16;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;

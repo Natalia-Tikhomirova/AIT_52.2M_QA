@@ -1,16 +1,25 @@
-package homework.homework_15;
+package homework.homework_16;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
+import java.util.List;
 
 public class TestBase1 {
     WebDriver driver;
+
+    public final String VALID_USER_EMAIL = "tnata12345@gmail.com";
+    public final String VALID_USER_PASSWORD = "Test@123";
+    public final String SECOND_ITEM_LOCATOR = "(//h2[@class='product-title']//a)[2]";
+    public final String CART_LOCATOR = "cart-qty";
+   public final String ADD_TO_CART_BUTTON = "//input[contains(@class, 'add-to-cart-button')]";
+
 
     @BeforeMethod
     public void setUp() {
@@ -21,7 +30,7 @@ public class TestBase1 {
     }
 
 
-    @AfterMethod(enabled = true) // включение или отключения закрытия браузера после тестов
+    @AfterMethod(enabled = false) // включение или отключения закрытия браузера после тестов
     public void tearDown() {
         driver.quit();
     }
@@ -70,5 +79,21 @@ public class TestBase1 {
         typeEmail(email);
         typePassword(password);
         clickOnLoginButton();
+    }
+
+    protected int getCartCount() {
+        if (isElementPresent(By.id(CART_LOCATOR))){
+            return driver.findElements(By.xpath(CART_LOCATOR)).size();
+        }
+        return 0;
+    }
+
+    protected boolean isItemAddedToCart(String textToFind) {
+       List<WebElement> items = driver.findElements(By.className(CART_LOCATOR));
+        for (WebElement element : items) {
+            if(element.getText().contains(textToFind))
+                return true;
+        }
+        return false;
     }
 }
