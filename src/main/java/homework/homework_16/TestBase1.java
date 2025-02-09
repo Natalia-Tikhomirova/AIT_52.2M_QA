@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -17,8 +18,9 @@ public class TestBase1 {
     public final String VALID_USER_EMAIL = "tnata12345@gmail.com";
     public final String VALID_USER_PASSWORD = "Test@123";
     public final String SECOND_ITEM_LOCATOR = "(//h2[@class='product-title']//a)[2]";
-    public final String CART_LOCATOR = "cart-qty";
-   public final String ADD_TO_CART_BUTTON = "//input[contains(@class, 'add-to-cart-button')]";
+    public final String CART_ITEMS_LOCATOR = ".cart-item-row";
+    public final String CART_COUNT_LOCATOR = ".mini-shopping-cart .count";
+    public final String ADD_TO_CART_BUTTON = "add-to-cart-button-31";
 
 
     @BeforeMethod
@@ -81,18 +83,30 @@ public class TestBase1 {
         clickOnLoginButton();
     }
 
-    protected int getCartCount() {
-        if (isElementPresent(By.id(CART_LOCATOR))){
-            return driver.findElements(By.xpath(CART_LOCATOR)).size();
-        }
-        return 0;
+
+    // Метод для получения количества товаров в корзине
+    public int getCartCount() {
+        WebElement cartElement = driver.findElement(By.cssSelector(CART_COUNT_LOCATOR));
+        String cartText = cartElement.getText().trim();
+        System.out.println("Текущий текст корзины: " + cartText);
+        return extractCartCount(cartText);
     }
 
+    public int extractCartCount(String text) {
+        try {
+            return Integer.parseInt(text.replaceAll("[^0-9]", ""));
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    // Метод для проверки наличия товара в корзине по названию
     protected boolean isItemAddedToCart(String textToFind) {
-       List<WebElement> items = driver.findElements(By.className(CART_LOCATOR));
-        for (WebElement element : items) {
-            if(element.getText().contains(textToFind))
+        List<WebElement> cartItems = driver.findElements(By.cssSelector(CART_ITEMS_LOCATOR));
+        for (WebElement item : cartItems) {
+            if (item.getText().contains(textToFind)) {
                 return true;
+            }
         }
         return false;
     }
