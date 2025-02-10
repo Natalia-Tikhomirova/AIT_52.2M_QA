@@ -12,10 +12,10 @@ public class LoginTests extends TestBase1 {
     }
 
     @Test()
-    public void loginWOEmaiTest() {
+    public void loginWOEmaiNegativeTest() {
         app.getUserHelper().clickOnLoginLink();
         app.getUserHelper().fillInLoginForm(new User()
-                .setEmail("tnata12345@gmail.com")
+                //.setEmail("tnata12345@gmail.com")
                 .setPassword("Test@123"));
         app.getUserHelper().clickOnLoginButton();
     }

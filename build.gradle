@@ -37,7 +37,9 @@ def registerTask(String taskName, String suitePath) {
     }
 }
 
+registerTask('smoke', 'src/test/resources/smoke.xml')
 registerTask('loginB', 'src/test/resources/loginB.xml')
 registerTask('login', 'src/test/resources/login.xml')
 registerTask('account', 'src/test/resources/account.xml')
 registerTask('item', 'src/test/resources/item.xml')
+
