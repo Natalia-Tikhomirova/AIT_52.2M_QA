@@ -1,4 +1,4 @@
-package homework.homework_16;
+package Homework_project;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -14,7 +14,7 @@ public class AddItemToCartTests extends TestBase1 {
 
     @BeforeMethod
     public void precondition() {
-        login("test2025@gmail.com", "Test@123");
+        app.getUserHelper().login("test2025@gmail.com", "Test@123");
     }
 
     @Test
@@ -36,7 +36,7 @@ public class AddItemToCartTests extends TestBase1 {
 
         // Клик по кнопке "Add to cart"
         System.out.println("Кликаем по кнопке 'Add to cart'");
-        driver.findElement(By.id(ADD_TO_CART_BUTTON)).click();
+        click(By.id(ADD_TO_CART_BUTTON));
         System.out.println("Клик выполнен, ждем обновления корзины...");
 
         //  Ожидание, пока текст в корзине обновится
