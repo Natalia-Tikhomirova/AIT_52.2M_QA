@@ -4,8 +4,8 @@ import Homework_project.core.ApplicationManager;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class TestBase1 extends ApplicationManager {
-    protected final ApplicationManager app = new ApplicationManager();
+public class TestBase1 {
+    protected final ApplicationManager app = new ApplicationManager(System.getProperty("browser", "chrome"));
 
     @BeforeMethod
     public void setUp() {

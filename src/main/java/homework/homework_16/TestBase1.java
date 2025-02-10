@@ -84,33 +84,6 @@ public class TestBase1 {
     }
 
 
-    // Метод для получения количества товаров в корзине
-    public int getCartCount() {
-        WebElement cartElement = driver.findElement(By.cssSelector(CART_COUNT_LOCATOR));
-        String cartText = cartElement.getText().trim();
-        System.out.println("Текущий текст корзины: " + cartText);
-        return extractCartCount(cartText);
-    }
-
-    public int extractCartCount(String text) {
-        try {
-            return Integer.parseInt(text.replaceAll("[^0-9]", ""));
-        } catch (NumberFormatException e) {
-            return 0;
-        }
-    }
-
-    // Метод для проверки наличия товара в корзине по названию
-    protected boolean isItemAddedToCart(String textToFind) {
-        List<WebElement> cartItems = driver.findElements(By.cssSelector(CART_ITEMS_LOCATOR));
-        for (WebElement item : cartItems) {
-            if (item.getText().contains(textToFind)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     protected void fillInLoginForm(User user) {
         typeEmail(user.getEmail());
         typePassword(user.getPassword());

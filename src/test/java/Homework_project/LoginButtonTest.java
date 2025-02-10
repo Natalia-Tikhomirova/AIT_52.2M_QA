@@ -7,6 +7,6 @@ public class LoginButtonTest extends TestBase1 {
 
     @Test
     public void isLoginButtonPresentTest() {
-        Assert.assertTrue(isLoginButtonPresent(), "Login button is found?: " + isLoginButtonPresent());
+        Assert.assertTrue(app.getUserHelper().isLoginButtonPresent(), "Login button is found?: " + app.getUserHelper().isLoginButtonPresent());
     }
 }

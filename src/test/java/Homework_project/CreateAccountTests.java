@@ -27,7 +27,7 @@ public class CreateAccountTests extends TestBase1 {
         // Enter 'email'
         app.driver.findElement(By.id("Email")).click();
         app.driver.findElement(By.id("Email")).clear();
-        app.driver.findElement(By.id("Email")).sendKeys("tnata12345@gmail.com");
+        app.driver.findElement(By.id("Email")).sendKeys("tnata12345" + System.currentTimeMillis() + "@gmail.com");
 
         // Enter 'Password'
         app.driver.findElement(By.cssSelector("#Password")).click();
