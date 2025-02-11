@@ -50,4 +50,8 @@ public class CreateAccountTests extends TestBase1 {
         // Click 'Log out' link
         // driver.findElement(By.linkText("Log out")).click();
     }
+
+
+
+
 }

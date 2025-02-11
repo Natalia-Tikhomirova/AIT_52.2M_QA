@@ -1,9 +1,7 @@
 package Homework_project.fw;
 
 import Homework_project.core.BaseHelper;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 public class CartHelper extends BaseHelper {
 
@@ -17,7 +15,19 @@ public class CartHelper extends BaseHelper {
     }
 
     public void goToCart() {
-        click(By.xpath(SHOPPING_CART_LOCATOR));
+
+        // Закрываем уведомление, если оно есть
+        try {
+            driver.findElement(By.className("close")).click();  // Если есть кнопка закрытия
+        } catch (NoSuchElementException ignored) {
+            // Если кнопки закрытия нет, игнорируем
+        }
+        // Прокручиваем страницу до кнопки корзины
+        WebElement cartButton = driver.findElement(By.xpath(SHOPPING_CART_LOCATOR));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", cartButton);
+
+        // Кликаем по кнопке корзины
+        cartButton.click();
     }
 
     public void refreshPage() {
@@ -27,15 +37,9 @@ public class CartHelper extends BaseHelper {
     public void pause(int millis){
         try {
             Thread.sleep(millis);
-        } catch (TimeoutException e) {
-            System.out.println("Времени не хватило");
-            throw new TimeoutException(e);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            System.out.println("Ошибка ожидания");
+            Thread.currentThread().interrupt();
         }
     }
-
-
-
-
 }

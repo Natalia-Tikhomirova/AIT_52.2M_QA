@@ -18,5 +18,6 @@ public class LoginTests extends TestBase1 {
                 //.setEmail("tnata12345@gmail.com")
                 .setPassword("Test@123"));
         app.getUserHelper().clickOnLoginButton();
+        System.out.println("Login was unsuccessful. Please correct the errors and try again. No customer account found.");
     }
 }
