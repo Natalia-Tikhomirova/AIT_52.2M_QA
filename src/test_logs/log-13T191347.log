@@ -1,0 +1,6 @@
+19:13:49.580 [main] INFO  Homework_project.TestBase1 -- Test is started: [createAccountPositiveTest]
+19:13:59.081 [main] ERROR Homework_project.TestBase1 -- Test is FAILED: [createAccountPositiveTest],Screenshot:[C:\AIT_TR_QA\01_FirstSelenium\src\test_screenshots\screen-1739470439045.png]
+19:13:59.840 [main] INFO  Homework_project.TestBase1 -- Test is started: [createAccountPositiveTest]
+19:14:09.175 [main] ERROR Homework_project.TestBase1 -- Test is FAILED: [createAccountPositiveTest],Screenshot:[C:\AIT_TR_QA\01_FirstSelenium\src\test_screenshots\screen-1739470449165.png]
+19:14:09.820 [main] INFO  Homework_project.TestBase1 -- Test is started: [createAccountPositiveTest]
+19:14:19.417 [main] ERROR Homework_project.TestBase1 -- Test is FAILED: [createAccountPositiveTest],Screenshot:[C:\AIT_TR_QA\01_FirstSelenium\src\test_screenshots\screen-1739470459416.png]

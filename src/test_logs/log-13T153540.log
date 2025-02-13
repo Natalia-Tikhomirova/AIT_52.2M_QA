@@ -1,0 +1,6 @@
+15:35:42.756 [main] INFO  Homework_project.TestBase1 -- Test is started: [createAccountPositiveTest]
+15:35:55.477 [main] INFO  Homework_project.TestBase1 -- Test is PASSED: [createAccountPositiveTest]
+15:35:55.510 [main] INFO  Homework_project.TestBase1 -- Test is started: [createAccountPositiveTest]
+15:36:04.909 [main] INFO  Homework_project.TestBase1 -- Test is PASSED: [createAccountPositiveTest]
+15:36:04.912 [main] INFO  Homework_project.TestBase1 -- Test is started: [createAccountPositiveTest]
+15:36:13.376 [main] INFO  Homework_project.TestBase1 -- Test is PASSED: [createAccountPositiveTest]

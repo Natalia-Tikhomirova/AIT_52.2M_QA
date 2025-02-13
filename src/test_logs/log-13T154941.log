@@ -1,0 +1,15 @@
+15:49:43.703 [main] INFO  Homework_project.TestBase1 -- Test is started: [loginExistedUserDataProviderPositiveTest]
+15:49:50.486 [main] INFO  Homework_project.TestBase1 -- LOGIN link is present. No need to Sign Out
+15:49:51.084 [main] INFO  Homework_project.fw.UserHelper -- Typing email: tnata12345@gmail.com
+15:49:51.369 [main] INFO  Homework_project.fw.UserHelper -- Typing password: Test@123
+15:49:52.343 [main] INFO  Homework_project.TestBase1 -- Test is PASSED: [loginExistedUserDataProviderPositiveTest]
+15:49:53.772 [main] INFO  Homework_project.TestBase1 -- Test is started: [loginExistedUserDataProviderPositiveTest]
+15:49:59.547 [main] INFO  Homework_project.TestBase1 -- LOGIN link is present. No need to Sign Out
+15:50:00.041 [main] INFO  Homework_project.fw.UserHelper -- Typing email: tnata123456@gmail.com
+15:50:00.311 [main] INFO  Homework_project.fw.UserHelper -- Typing password: Test@123
+15:50:01.248 [main] INFO  Homework_project.TestBase1 -- Test is PASSED: [loginExistedUserDataProviderPositiveTest]
+15:50:01.960 [main] INFO  Homework_project.TestBase1 -- Test is started: [loginExistedUserDataProviderPositiveTest]
+15:50:07.691 [main] INFO  Homework_project.TestBase1 -- LOGIN link is present. No need to Sign Out
+15:50:08.282 [main] INFO  Homework_project.fw.UserHelper -- Typing email: tnata@gmail.com
+15:50:08.604 [main] INFO  Homework_project.fw.UserHelper -- Typing password: Test@123
+15:50:09.519 [main] INFO  Homework_project.TestBase1 -- Test is PASSED: [loginExistedUserDataProviderPositiveTest]

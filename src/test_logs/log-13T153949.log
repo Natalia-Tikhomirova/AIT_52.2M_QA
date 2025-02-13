@@ -1,0 +1,12 @@
+15:39:51.540 [main] INFO  Homework_project.TestBase1 -- Test is started: [loginExistedUserDataProviderPositiveTest]
+15:39:58.900 [main] INFO  Homework_project.TestBase1 -- LOGIN link is present. No need to Sign Out
+15:39:59.707 [main] INFO  Homework_project.fw.UserHelper -- Typing password: Test@123
+15:40:02.976 [main] ERROR Homework_project.TestBase1 -- Test is FAILED: [loginExistedUserDataProviderPositiveTest],Screenshot:[C:\AIT_TR_QA\01_FirstSelenium\src\test_screenshots\screen-1739457602924.png]
+15:40:05.803 [main] INFO  Homework_project.TestBase1 -- Test is started: [loginExistedUserDataProviderPositiveTest]
+15:40:12.428 [main] INFO  Homework_project.TestBase1 -- LOGIN link is present. No need to Sign Out
+15:40:13.069 [main] INFO  Homework_project.fw.UserHelper -- Typing password: Test@123
+15:40:16.229 [main] ERROR Homework_project.TestBase1 -- Test is FAILED: [loginExistedUserDataProviderPositiveTest],Screenshot:[C:\AIT_TR_QA\01_FirstSelenium\src\test_screenshots\screen-1739457616227.png]
+15:40:18.356 [main] INFO  Homework_project.TestBase1 -- Test is started: [loginExistedUserDataProviderPositiveTest]
+15:40:25.579 [main] INFO  Homework_project.TestBase1 -- LOGIN link is present. No need to Sign Out
+15:40:26.620 [main] INFO  Homework_project.fw.UserHelper -- Typing password: Test@123
+15:40:30.151 [main] ERROR Homework_project.TestBase1 -- Test is FAILED: [loginExistedUserDataProviderPositiveTest],Screenshot:[C:\AIT_TR_QA\01_FirstSelenium\src\test_screenshots\screen-1739457630147.png]

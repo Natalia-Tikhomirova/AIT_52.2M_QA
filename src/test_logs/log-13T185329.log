@@ -1,0 +1,2 @@
+18:53:30.864 [main] INFO  Homework_project.TestBase1 -- Test is started: [CreateAccountNewPositiveTest]
+18:53:40.278 [main] ERROR Homework_project.TestBase1 -- Test is FAILED: [CreateAccountNewPositiveTest],Screenshot:[C:\AIT_TR_QA\01_FirstSelenium\src\test_screenshots\screen-1739469220239.png]

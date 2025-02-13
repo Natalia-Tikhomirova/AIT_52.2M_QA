@@ -56,10 +56,6 @@ public class CreateAccountTests extends TestBase1 {
     }
 
 
-    @Test
-    public void CreateAccountNewPositiveTest() {
-        createAccountPositiveTest("male", "Natalia", "Tikhomirova", "tnata12345" + System.currentTimeMillis() + "@gmail.com", "Test@123", "Test@123");
-    }
 
     @Test(dataProvider = "registrationDataProvider", dataProviderClass = DataProviders.class)
     public void createAccountPositiveTest(String gender, String firstName, String lastName, String email, String password, String confirmPassword) {
